@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>互動旅遊景點推薦平台</title>
+  <style>
+    html, body { width: 100%; height: 100%; margin: 0; background: #000; overflow: hidden; }
+    #globe-container { width: 100%; height: 100%; }
+    #site-heading { position: absolute; top: 10px; left: 0; width: 100%; z-index: 60;
+      margin: 0; color: red; text-align: center; font: bold 28px Arial, sans-serif;
+      pointer-events: none; }
+    #gl-infoBox { display: none; position: absolute; top: 20px; left: 20px; width: 320px;
+      max-height: calc(100vh - 40px); padding: 20px; overflow-y: auto; z-index: 100;
+      color: white; background: rgba(25,25,25,.85); border: 1px solid #444;
+      border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,.7);
+      font-family: Arial, sans-serif; }
+    #gl-infoBox img { width: 100%; height: auto; border-radius: 8px; }
+    #gl-infoBox h3 { color: #ffb700; }
+    #gl-infoBox h4 { color: #aaa; border-bottom: 1px solid #444; }
+    #gl-infoBox p { line-height: 1.6; color: #ddd; }
+    #gl-closeButton, #gl-resetButton { position: absolute; width: 30px; height: 30px;
+      line-height: 28px; text-align: center; border: 1px solid #777; border-radius: 50%;
+      background: rgba(0,0,0,.5); color: #fff; cursor: pointer; z-index: 101; }
+    #gl-closeButton { top: 15px; right: 15px; }
+    #gl-resetButton { top: 20px; right: 20px; }
+    #gl-title { position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
+      color: white; z-index: 50; pointer-events: none; }
+    #gl-developer { position: absolute; bottom: 15px; right: 15px; color: #aaa; z-index: 50; }
+    @media (max-width: 500px) {
+      #site-heading { font-size: 19px; }
+      #gl-infoBox { width: calc(100% - 80px); top: auto; bottom: 20px;
+        max-height: 45vh; }
+    }
+  </style>
+  <script src="https://unpkg.com/three@0.128.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+</head>
+<body>
+  <h1 id="site-heading">互動旅遊景點推薦平台<br>Developer: Huang Qingyin</h1>
+  <div id="globe-container"></div>
+
+  <div id="gl-ui-container">
+    <div id="gl-infoBox">
+      <div id="gl-closeButton">×</div>
+      <h3 id="gl-infoName"></h3>
+      <img id="gl-infoImage" src="" alt="景點圖片">
+      <h4>Description</h4><p id="gl-infoDescEn"></p>
+      <h4>介紹</h4><p id="gl-infoDescZh"></p>
+    </div>
+    <div id="gl-resetButton">⟲</div>
+  </div>
+
+  <script>
+    const DEMO_SPOTS = [
+      {
+        name: "Giza Pyramid Complex",
+        lat: 29.9772,
+        lon: 31.1299,
+        desc_en: "The Giza pyramid complex (also called the Giza necropolis) in Egypt is home to the Great Pyramid, the pyramid of Khafre, and the pyramid of Menkaure.",
+        desc_zh: "位於埃及的吉薩金字塔群（亦稱吉薩墓地）內，坐落著大金字塔、卡夫拉金字塔以及孟卡拉金字塔。",
+        image_url: "https://upload.wikimedia.org/wikipedia/commons/9/96/Pyramids_of_the_Giza_Necropolis.jpg"
+      },
+      {
+        name: "Eiffel Tower",
+        lat: 48.8584,
+        lon: 2.2945,
+        desc_en: "The Eiffel Tower is a famous landmark in Paris, France.",
+        desc_zh: "埃菲爾鐵塔位於法國巴黎，是這座城市的著名地標。",
+        image_url: "https://upload.wikimedia.org/wikipedia/commons/a/a8/Tour_Eiffel_Wikimedia_Commons.jpg"
+      },
+      {
+        name: "Statue of Liberty",
+        lat: 40.6892,
+        lon: -74.0445,
+        desc_en: "The Statue of Liberty stands on Liberty Island in New York Harbor, USA.",
+        desc_zh: "自由女神像矗立於美國紐約港的自由島上。",
+        image_url: "https://upload.wikimedia.org/wikipedia/commons/1/1d/Statue-of-liberty.jpg"
+      }
+    ];
+  </script>
+  <script src="https://cdn.jsdelivr.net/gh/digimarketingai/EZ-Globe.js/globe-bundle.js" defer></script>
+</body>
+</html>
